@@ -41,5 +41,3 @@ PassManager is a user-friendly password manager that helps users securely store,
    - For an added layer of security, users have the option to enable two-factor authentication using one-time passwords method.
 
 PassManager is designed to prioritize user privacy and security while offering a seamless and user-friendly experience. Its implementation on the SQLite database ensures efficiency and ease of use, making it an ideal password manager for individuals and businesses looking to maintain a secure digital presence.
-
-https://pypi.org/project/py2app/

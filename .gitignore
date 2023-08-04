@@ -1,0 +1,10 @@
+credentials.py
+database.db
+.vscode
+__pycache__
+.pytest_cache
+.idea
+venv
+totp.py
+setup.py
+```

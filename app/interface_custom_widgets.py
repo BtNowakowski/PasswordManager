@@ -118,14 +118,6 @@ class ShowButton(ctk.CTkButton):
         elif fg == "#FFFFFF":
             self.master.children["!customtext"].configure(fg="#121212")
             self.configure(text="Hide")
-            # elif fg == "systemTextBackgroundColor":
-            #     self.master.children["!customtext"].configure(fg="systemTextColor")
-            #     self.configure(text=" Hide ")
-            # elif fg == "systemTextColor":
-            #     self.master.children["!customtext"].configure(
-            #         fg="systemTextBackgroundColor"
-            #    )
-            self.configure(text="Show")
 
 
 class CopyButton(ctk.CTkButton):

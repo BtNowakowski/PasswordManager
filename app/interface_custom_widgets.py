@@ -77,10 +77,14 @@ class EditButton(ctk.CTkButton):
 
     def callback(self):
         if self.master.children["!customtext"].cget("state") == "disabled":
-            self.master.children["!customtext"].config(fg="#FFFFFF", state="normal")
+            if self.master.children["!customtext"].cget("fg") != "#FFFFFF":
+                self.master.children["!customtext"].config(fg="#FFFFFF", state="normal")
+            else:
+                self.master.children["!customtext"].config(state="normal")
             self.configure(text="Save")
         elif self.master.children["!customtext"].cget("state") == "normal":
             self.configure(text="Edit")
+            self.master.children["!showbutton"].configure(text="Show")
             self.master.children["!customtext"].config(fg="#121212", state="disabled")
             db1 = db()
             usr = db1.selectById(self.user_id, "users")
@@ -114,10 +118,10 @@ class ShowButton(ctk.CTkButton):
 
         if fg == "#121212":  # B3B3B3
             self.master.children["!customtext"].configure(fg="#FFFFFF")
-            self.configure(text="Show ")
+            self.configure(text="Hide")
         elif fg == "#FFFFFF":
             self.master.children["!customtext"].configure(fg="#121212")
-            self.configure(text="Hide")
+            self.configure(text="Show")
 
 
 class CopyButton(ctk.CTkButton):

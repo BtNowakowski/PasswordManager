@@ -20,7 +20,7 @@ from database import DatabaseHelper as db
 import pyotp
 
 
-def display_passwords(id: int, widgets_list: Frame = None, app=None):
+def display_passwords(id: int, widgets_list: Frame = None, app=None) -> None:
     db1 = db()
     passwords = db1.show_user_passwords(id)
     for num, password in enumerate(passwords):
@@ -87,7 +87,7 @@ def display_passwords(id: int, widgets_list: Frame = None, app=None):
         k.grid(row=num, column=7, pady=10, padx=3, ipadx=3, ipady=3)
 
 
-def raise_frame(frame):
+def raise_frame(frame) -> None:
     frame.tkraise()
 
 

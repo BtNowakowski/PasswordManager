@@ -52,7 +52,7 @@ class DeleteButton(ctk.CTkButton):
             # hover_color="dark red",
         )
 
-    def callback(self):
+    def callback(self) -> None:
         try:
             db1 = db()
             db1.deleteById(self.tag, "passwords")
@@ -75,7 +75,7 @@ class EditButton(ctk.CTkButton):
             command=self.callback,
         )
 
-    def callback(self):
+    def callback(self) -> None:
         if self.master.children["!customtext"].cget("state") == "disabled":
             if self.master.children["!customtext"].cget("fg") != "#FFFFFF":
                 self.master.children["!customtext"].config(fg="#FFFFFF", state="normal")
@@ -112,7 +112,7 @@ class ShowButton(ctk.CTkButton):
             command=self.callback,
         )
 
-    def callback(self):
+    def callback(self) -> None:
         txt_widget = self.master.children["!customtext"]
         fg = txt_widget.cget("fg")
 
@@ -135,7 +135,7 @@ class CopyButton(ctk.CTkButton):
             command=self.callback,
         )
 
-    def callback(self):
+    def callback(self) -> None:
         self.app.clipboard_clear()
         self.app.clipboard_append(self.master.children["!customtext"].get("1.0", END))
 

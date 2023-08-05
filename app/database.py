@@ -10,7 +10,7 @@ class DatabaseHelper:
         self.cursor = self.connect.cursor()
 
     # create the database table
-    def createTable(self, table_name):
+    def createTable(self, table_name) -> None:
         if table_name == "passwords":
             self.cursor.execute(
                 f"""CREATE TABLE IF NOT EXISTS {table_name}(id integer primary key not null, name TEXT, value TEXT, user_id INTEGER, FOREIGN KEY (user_id) REFERENCES users (id))"""
@@ -22,7 +22,7 @@ class DatabaseHelper:
 
     # this will help save the database after adding data to the database.
     # without this your data will not save and it might generate error when trying to assess the data
-    def saveDatabase(self):
+    def saveDatabase(self) -> None:
         self.connect.commit()
 
     def show_user_passwords(self, id):
@@ -32,11 +32,11 @@ class DatabaseHelper:
         return passwds
 
     # this will help close the database when you are done with it, to prevent data leek
-    def closeConnection(self):
+    def closeConnection(self) -> None:
         self.connect.close()
 
     # this will retrieve all the data saved in the database in list format
-    def selectAllFromDatabase(self, table_name):
+    def selectAllFromDatabase(self, table_name) -> list:
         if table_name == "passwords":
             return self.cursor.execute(
                 f"SELECT * FROM {self.TABLE_NAMES[0]}"
@@ -47,7 +47,7 @@ class DatabaseHelper:
             ).fetchall()
 
     # this will retrieve the first data that matches the query and return it as a data class
-    def selectByName(self, name, table_name):
+    def selectByName(self, name, table_name) -> dict:
         if table_name == "passwords":
             data = self.cursor.execute(
                 f"SELECT * FROM {self.TABLE_NAMES[0]} WHERE name=?", (name,)
@@ -70,7 +70,7 @@ class DatabaseHelper:
                 "tfa_key": data[4],
             }
 
-    def selectById(self, id, table_name):
+    def selectById(self, id, table_name) -> dict:
         if table_name == "passwords":
             data = self.cursor.execute(
                 f"SELECT * FROM {self.TABLE_NAMES[0]} WHERE id=?", (id,)
@@ -94,7 +94,7 @@ class DatabaseHelper:
                 "tfa_key": data[4],
             }
 
-    def UpdateById(self, value, id, table_name):
+    def UpdateById(self, value, id, table_name) -> None:
         if table_name == "passwords":
             self.cursor.execute(
                 f"Update {self.TABLE_NAMES[0]} set value = ? where id = ?",
@@ -102,7 +102,7 @@ class DatabaseHelper:
                     value,
                     id,
                 ),
-            ).fetchone()
+            )
         elif table_name == "users":
             self.cursor.execute(
                 f"UPDATE {self.TABLE_NAMES[1]} SET email = ? WHERE id=?",
@@ -110,10 +110,10 @@ class DatabaseHelper:
                     value,
                     id,
                 ),
-            ).fetchone()
+            )
 
     # this will delete all the data that matches the query
-    def deleteByName(self, name, table_name):
+    def deleteByName(self, name, table_name) -> None:
         if table_name == "passwords":
             return self.cursor.execute(
                 f"DELETE  FROM {self.TABLE_NAMES[0]} WHERE name=?", (name,)
@@ -124,7 +124,7 @@ class DatabaseHelper:
             )
 
     # this will delete all the data that matches the query
-    def deleteById(self, id, table_name):
+    def deleteById(self, id, table_name) -> None:
         if table_name == "passwords":
             return self.cursor.execute(
                 f"DELETE  FROM {self.TABLE_NAMES[0]} WHERE id=?", (id,)
@@ -135,21 +135,21 @@ class DatabaseHelper:
             )
 
     # by using the data class, you can add stuff into the database
-    def insertIntoDatabase(self, item, table_name):
+    def insertIntoDatabase(self, item, table_name) -> None:
         if table_name == "passwords":
             sql = f"INSERT INTO {self.TABLE_NAMES[0]} (name, value, user_id) VALUES (?, ?, ?)"
             val = (item.name, item.value, item.user_id)
             insert = self.cursor.execute(sql, val)
             self.connect.commit()
-            return insert
+            # return insert
         elif table_name == "users":
             sql = f"INSERT INTO {self.TABLE_NAMES[1]} (email, password, tfa, tfa_key) VALUES (?, ?, ?, ?)"
             val = (item.email, item.password, item.tfa, item.tfa_key)
             insert = self.cursor.execute(sql, val)
             self.connect.commit()
-            return insert
+            # return insert
 
-    def checkIfEmailExists(self, email):
+    def checkIfEmailExists(self, email) -> bool:
         data = self.cursor.execute(
             f"SELECT * FROM users WHERE email=?", (email,)
         ).fetchall()
@@ -158,13 +158,13 @@ class DatabaseHelper:
         else:
             return True
 
-    def getUserTfaKey(self, id):
+    def getUserTfaKey(self, id) -> str:
         data = self.cursor.execute(
             f"SELECT tfa_key FROM users WHERE id=?", (id,)
         ).fetchone()
         return data[0]
 
-    def checkIfIdExists(self, id):
+    def checkIfIdExists(self, id) -> bool:
         data = self.cursor.execute(f"SELECT * FROM users WHERE id=?", (id,)).fetchall()
         if len(data) == 0:
             return False
@@ -172,18 +172,18 @@ class DatabaseHelper:
             return True
 
     # this will not just delete all the data in the database, it will also delete the table as well
-    def deleteDatabase(self, table_name):
+    def deleteDatabase(self, table_name) -> None:
         if table_name == "passwords":
-            return self.cursor.execute(f"DROP TABLE IF EXISTS {self.TABLE_NAMES[0]}")
+            self.cursor.execute(f"DROP TABLE IF EXISTS {self.TABLE_NAMES[0]}")
         elif table_name == "users":
-            return self.cursor.execute(f"DROP TABLE IF EXISTS {self.TABLE_NAMES[1]}")
+            self.cursor.execute(f"DROP TABLE IF EXISTS {self.TABLE_NAMES[1]}")
 
-    def count_users(self):
+    def count_users(self) -> int:
         return self.cursor.execute(
             "SELECT COUNT(DISTINCT email) FROM users;"
         ).fetchone()[0]
 
-    def get_user_id(self, email):
+    def get_user_id(self, email) -> int:
         return self.cursor.execute(
             f"SELECT id FROM {self.TABLE_NAMES[1]} WHERE email=?", (email,)
         ).fetchone()[0]

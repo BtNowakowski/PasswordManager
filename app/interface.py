@@ -20,6 +20,7 @@ from login import login as log
 from register import register as regist
 from database import DatabaseHelper as db
 from password import Password
+import platform
 
 # from smtp import send_email
 
@@ -161,7 +162,10 @@ def back_to_start():
 
 
 def on_mousewheel(event):
-    widgets_canvas.yview_scroll(int(-1 * event.delta), "units")
+    if platform.system() == "Windows":
+        widgets_canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+    else:
+        widgets_canvas.yview_scroll(int(-1 * event.delta), "units")
 
 
 start_page = Frame(app)

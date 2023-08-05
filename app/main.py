@@ -1,5 +1,5 @@
 # from modules.interface import app
-from interface import app, main_page
+from interface import app
 from database import DatabaseHelper as Db
 
 dba = Db()

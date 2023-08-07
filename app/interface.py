@@ -167,6 +167,9 @@ def on_mousewheel(event):
     else:
         widgets_canvas.yview_scroll(int(-1 * event.delta), "units")
 
+def adjust_scrollregion(event):
+    widgets_canvas.configure(scrollregion=widgets_canvas.bbox("all"))
+
 
 start_page = Frame(app)
 register_page = Frame(app)
@@ -183,9 +186,6 @@ widgets_canvas.pack(padx=30, side="left", fill="both", expand=YES)
 scrollbar = Scrollbar(main_page, orient=VERTICAL, command=widgets_canvas.yview)
 scrollbar.pack(side=RIGHT, fill=Y)
 
-
-def adjust_scrollregion(event):
-    widgets_canvas.configure(scrollregion=widgets_canvas.bbox("all"))
 
 
 widgets_canvas.configure(yscrollcommand=scrollbar.set)

@@ -2,8 +2,8 @@
 
 PassManager is a user-friendly password manager that helps users securely store, manage, and generate passwords. It utilizes SQLite as its database to ensure data integrity and security. The application allows new users to register and existing users to log in, enabling them to store their passwords in a centralized and protected environment.  
 
-<p style="text-align:center"> vvv Screenshots below vvv </p>  
 
+<p style="text-align: center;"> vvv Screenshots below vvv  </p>  
 
 ## Key Features:
 

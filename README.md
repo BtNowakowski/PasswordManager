@@ -41,3 +41,11 @@ PassManager is a user-friendly password manager that helps users securely store,
    - For an added layer of security, users have the option to enable two-factor authentication using one-time passwords method.
 
 PassManager is designed to prioritize user privacy and security while offering a seamless and user-friendly experience. Its implementation on the SQLite database ensures efficiency and ease of use, making it an ideal password manager for individuals and businesses looking to maintain a secure digital presence.
+
+<img width="1248" alt="obraz" src="https://github.com/BtNowakowski/PasswordManager/assets/107316656/cc57daeb-8a23-406e-bbba-118a114b6229">
+<img width="1267" alt="obraz" src="https://github.com/BtNowakowski/PasswordManager/assets/107316656/2bc189d8-1611-49b7-b6ad-3f48805492f2">
+<img width="1276" alt="obraz" src="https://github.com/BtNowakowski/PasswordManager/assets/107316656/7a5eb674-48cf-4b83-8c08-c89a05ae3568">
+<img width="1276" alt="obraz" src="https://github.com/BtNowakowski/PasswordManager/assets/107316656/5c8c4091-8c81-4c34-b2cb-32747a376689">
+
+
+
